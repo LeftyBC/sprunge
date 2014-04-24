@@ -20,18 +20,18 @@ class Sprunge(db.Model):
 
 class Index(webapp.RequestHandler):
 
-    u = 'http://sprunge.us'
-    r = 'sprunge'
+    u = 'http://pastebitch.com'
+    r = 'pastebitch'
 
     def help(self, u, r):
         f = 'data:text/html,<form action="%s" method="POST"><textarea name="%s" cols="80" rows="24"></textarea><br><button type="submit">%s</button></form>' % (u, r, r)
         return """
 <style> a { text-decoration: none } </style>
 <pre>
-sprunge(1)                          SPRUNGE                          sprunge(1)
+pastebitch(1)                          PASTEBITCH                          pastebitch(1)
 
 NAME
-    sprunge: command line pastebin.
+    pastebitch: command line pastebin.
 
 SYNOPSIS
     &lt;command&gt; | curl -F '%s=&lt;-' %s
@@ -45,8 +45,8 @@ EXAMPLES
        %s/VZiY
     ~$ firefox %s/VZiY?py#n-7
 
-SEE ALSO
-    http://github.com/rupa/sprunge
+THANKS TO
+    Shamelessly forked from <a href='http://github.com/rupa/sprunge'>sprunge</a>
 
 </pre>""" % (r, u, f, r, u, u, u)
 
