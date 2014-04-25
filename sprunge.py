@@ -91,6 +91,7 @@ THANKS TO
         c = Sprunge.gql('WHERE name = :1', got).get()
         if not c:
             self.response.headers['Content-Type'] = 'text/plain; charset=UTF-8'
+            self.response.set_status(404)
             self.response.out.write(got + ' not found')
             return
 
@@ -130,18 +131,19 @@ THANKS TO
                 return
 
             # clear out the same amount of space we've used up
-            to_clear = len(s.content)
-            while to_clear > 0:
-                old = Sprunge.gql('ORDER BY date ASC LIMIT 1').get()
-                if not old:
-                    break
-                to_clear -= len(old.content)
-                old.delete()
+            #to_clear = len(s.content)
+            #print "clearing out %d entries" % to_clear
+            #while to_clear > 0:
+            #    old = Sprunge.gql('ORDER BY date ASC LIMIT 1').get()
+            #    if not old:
+            #        break
+            #    to_clear -= len(old.content)
+            #    old.delete()
 
             self.response.out.write('{0}/{1}\n'.format(self.u, nid))
 
 def main():
-    application = webapp.WSGIApplication([(r'/(.*)', Index)],debug=False)
+    application = webapp.WSGIApplication([(r'/(.*)', Index)],debug=True)
     wsgiref.handlers.CGIHandler().run(application)
 
 if __name__ == "__main__":
